@@ -16,6 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
+      max-parallel: 6
       matrix:
         target: [win64,linux64]
         variant: [nonfree,gpl,lgpl,nonfree 4.4,gpl 4.4,lgpl 4.4,nonfree-shared,gpl-shared,lgpl-shared,nonfree-shared 4.4,gpl-shared 4.4,lgpl-shared 4.4]
