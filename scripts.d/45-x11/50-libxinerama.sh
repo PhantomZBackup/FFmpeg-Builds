@@ -1,16 +1,16 @@
 #!/bin/bash
 
-GMP_SRC="https://ftp.gnu.org/gnu/gmp/gmp-6.2.1.tar.xz"
+LIBXINERAMA_REPO="https://gitlab.freedesktop.org/xorg/lib/libxinerama.git"
+LIBXINERAMA_COMMIT="c5187f076d16601c15c59c5a2f05c0513d9f042b"
 
 ffbuild_enabled() {
+    [[ $TARGET != linux* ]] && return -1
     return 0
 }
 
 ffbuild_dockerbuild() {
-    wget -O gmp.tar.xz "$GMP_SRC" --tries=3 || curl -L -o gmp.tar.xz "$GMP_SRC" --retry 3
-    tar xaf gmp.tar.xz
-    rm gmp.tar.xz
-    cd gmp*
+    git-mini-clone "$LIBXINERAMA_REPO" "$LIBXINERAMA_COMMIT" libxinerama
+    cd libxinerama
 
     autoreconf -i
 
@@ -21,7 +21,7 @@ ffbuild_dockerbuild() {
         --with-pic
     )
 
-    if [[ $TARGET == win* || $TARGET == linux* ]]; then
+    if [[ $TARGET == linux* ]]; then
         myconf+=(
             --host="$FFBUILD_TOOLCHAIN"
         )
@@ -33,12 +33,4 @@ ffbuild_dockerbuild() {
     ./configure "${myconf[@]}"
     make -j$(nproc)
     make install
-}
-
-ffbuild_configure() {
-    echo --enable-gmp
-}
-
-ffbuild_unconfigure() {
-    echo --disable-gmp
 }
