@@ -8,8 +8,8 @@ on:
   repository_dispatch:
     types: [build]
   schedule:
-    # Every Friday at 02 am UTC
-    - cron: '0 2 * * FRI'
+    # Everyday at 02 am UTC
+    - cron: '0 2 * * *'
   workflow_dispatch:
 
 env:
