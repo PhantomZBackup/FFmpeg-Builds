@@ -87,10 +87,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      max-parallel: 9
+      max-parallel: 6
       matrix:
         target: [win64,linux64]
-        variant: [nonfree,gpl,lgpl,nonfree 4.4,gpl 4.4,lgpl 4.4,nonfree 5.0,gpl 5.0,lgpl 5.0,nonfree-shared,gpl-shared,lgpl-shared,nonfree-shared 4.4,gpl-shared 4.4,lgpl-shared 4.4,nonfree-shared 5.0,gpl-shared 5.0,lgpl-shared 5.0]
+        variant: [nonfree,gpl,nonfree 4.4,gpl 4.4,nonfree 5.0,gpl 5.0,nonfree-shared,gpl-shared,nonfree-shared 4.4,gpl-shared 4.4,nonfree-shared 5.0,gpl-shared 5.0]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -128,10 +128,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      max-parallel: 9
+      max-parallel: 6
       matrix:
         target: [win64,linux64]
-        variant: [nonfree,gpl,lgpl,nonfree 4.4,gpl 4.4,lgpl 4.4,nonfree 5.0,gpl 5.0,lgpl 5.0,nonfree-shared,gpl-shared,lgpl-shared,nonfree-shared 4.4,gpl-shared 4.4,lgpl-shared 4.4,nonfree-shared 5.0,gpl-shared 5.0,lgpl-shared 5.0]
+        variant: [nonfree,gpl,nonfree 4.4,gpl 4.4,nonfree 5.0,gpl 5.0,nonfree-shared,gpl-shared,nonfree-shared 4.4,gpl-shared 4.4,nonfree-shared 5.0,gpl-shared 5.0]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
