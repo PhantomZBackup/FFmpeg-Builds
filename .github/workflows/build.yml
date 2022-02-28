@@ -57,7 +57,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [win64,linux64]
+        target: [win32,win64,linux64]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -91,10 +91,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      max-parallel: 8
+      max-parallel: 12
       matrix:
-        target: [win64,linux64]
-        variant: [nonfree,gpl,nonfree 4.4,gpl 4.4,nonfree 5.0,gpl 5.0,nonfree-shared,gpl-shared,nonfree-shared 4.4,gpl-shared 4.4,nonfree-shared 5.0,gpl-shared 5.0]
+        target: [win32,win64,linux64]
+        variant: [nonfree,gpl,nonfree 5.0,gpl 5.0,nonfree-shared,gpl-shared,nonfree-shared 5.0,gpl-shared 5.0]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -135,7 +135,7 @@ jobs:
       max-parallel: 8
       matrix:
         target: [win64,linux64]
-        variant: [nonfree,gpl,nonfree 4.4,gpl 4.4,nonfree 5.0,gpl 5.0,nonfree-shared,gpl-shared,nonfree-shared 4.4,gpl-shared 4.4,nonfree-shared 5.0,gpl-shared 5.0]
+        variant: [nonfree,gpl,nonfree 5.0,gpl 5.0,nonfree-shared,gpl-shared,nonfree-shared 5.0,gpl-shared 5.0]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -145,6 +145,9 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ github.token }}
+      - name: Install UPX
+        continue-on-error: true
+        run: brew install upx
       - name: Build ffmpeg
         run: |
           T="$(echo -n ${{ github.token }} | sha256sum | head -c 64)" && echo -e "::add-mask::${T}\n::stop-commands::${T}"

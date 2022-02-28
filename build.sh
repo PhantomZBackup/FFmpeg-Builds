@@ -70,7 +70,7 @@ cat <<EOF >"$BUILD_SCRIPT"
         --extra-cflags='$FF_CFLAGS' --extra-cxxflags='$FF_CXXFLAGS' \
         --extra-ldflags='$FF_LDFLAGS' --extra-ldexeflags='$FF_LDEXEFLAGS' --extra-libs='$FF_LIBS' \
         --extra-version="\$(date +%Y%m%d)"
-    make -j\$(nproc) V=1
+    make -j4 V=1
     make install install-doc
 EOF
 
@@ -88,6 +88,10 @@ package_variant ffbuild/prefix "ffbuild/pkgroot/$BUILD_NAME"
 [[ -n "$LICENSE_FILE" ]] && cp "ffbuild/ffmpeg/$LICENSE_FILE" "ffbuild/pkgroot/$BUILD_NAME/LICENSE.txt"
 
 cd ffbuild/pkgroot
+if command -v upx; then
+    upx -q --best --lzma "$BUILD_NAME"/bin/* 2>/dev/null || true
+    upx -q --best --lzma "$BUILD_NAME"/lib/* 2>/dev/null || true
+fi
 if [[ "${TARGET}" == win* ]]; then
     OUTPUT_FNAME="${BUILD_NAME}.zip"
     zip -9 -r "${ARTIFACTS_PATH}/${OUTPUT_FNAME}" "$BUILD_NAME"

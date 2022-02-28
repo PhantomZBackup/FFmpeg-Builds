@@ -20,7 +20,7 @@ Builds run daily at 02:00 UTC (or GitHubs idea of that time) and are automatical
 
 ## Package List
 
-For a list of included dependencies check the scripts.d directory.
+For a list of included dependencies check the `scripts.d` directory.
 Every file corresponds to its respective package.
 
 ## How to make a build
@@ -38,7 +38,7 @@ Every file corresponds to its respective package.
 
 * `./build.sh target variant [addins]`
 
-On success, the resulting zip file will be in the `artifacts` subdir.
+On success, the resulting zip/tar.xz archive file will be in the `artifacts` subdir.
 
 ### Targets, Variants and Addins
 
@@ -58,5 +58,6 @@ Additional: _Use With Caution_ as they are GPL-incompatable!
 * `nonfree-shared` Same as nonfree, but with nonfree set of dependencies.
 
 All of those can be optionally combined with any combination of addins.
+* `5.0` to build from the 5.0 release branch instead of master.
 * `4.4` to build from the 4.4 release branch instead of master.
 * `debug` to not strip debug symbols from the binaries. This increases the output size by about 250MB.
