@@ -199,7 +199,7 @@ jobs:
         if: ${{ success() }}
         with:
           token: ${{ github.token }}  # ${{ secrets.GITHUB_TOKEN }}
-          expire-in: 15days
+          expire-in: 7days
       - name: Prune old releases
         run: ./util/prunetags.sh
         env:
