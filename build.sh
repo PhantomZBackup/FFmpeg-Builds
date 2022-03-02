@@ -89,8 +89,8 @@ package_variant ffbuild/prefix "ffbuild/pkgroot/$BUILD_NAME"
 
 cd ffbuild/pkgroot
 if command -v upx; then
-    upx -q --best --lzma "$BUILD_NAME"/bin/* 2>/dev/null || true
-    upx -q --best --lzma "$BUILD_NAME"/lib/* 2>/dev/null || true
+    upx -q -9 "$BUILD_NAME"/bin/* 2>/dev/null || true
+    upx -q -9 "$BUILD_NAME"/lib/* 2>/dev/null || true
 fi
 if [[ "${TARGET}" == win* ]]; then
     OUTPUT_FNAME="${BUILD_NAME}.zip"

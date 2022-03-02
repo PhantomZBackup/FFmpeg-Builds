@@ -13,8 +13,8 @@ on:
         default: false
         required: false
   schedule:
-    # Everyday at 02 am UTC
-    - cron: '0 2 * * *'
+    # Everyday at 00 am UTC
+    - cron: '0 0 * * *'
 
 env:
   DOCKER_BUILDKIT: 1
@@ -199,7 +199,7 @@ jobs:
         if: ${{ success() }}
         with:
           token: ${{ github.token }}  # ${{ secrets.GITHUB_TOKEN }}
-          expire-in: 7days
+          expire-in: 3days
       - name: Prune old releases
         run: ./util/prunetags.sh
         env:
