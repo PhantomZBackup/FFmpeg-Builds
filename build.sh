@@ -88,16 +88,12 @@ package_variant ffbuild/prefix "ffbuild/pkgroot/$BUILD_NAME"
 [[ -n "$LICENSE_FILE" ]] && cp "ffbuild/ffmpeg/$LICENSE_FILE" "ffbuild/pkgroot/$BUILD_NAME/LICENSE.txt"
 
 cd ffbuild/pkgroot
-if command -v upx; then
-    upx -q -9 "$BUILD_NAME"/bin/* 2>/dev/null || true
-    upx -q -9 "$BUILD_NAME"/lib/* 2>/dev/null || true
-fi
 if [[ "${TARGET}" == win* ]]; then
     OUTPUT_FNAME="${BUILD_NAME}.zip"
     zip -9 -r "${ARTIFACTS_PATH}/${OUTPUT_FNAME}" "$BUILD_NAME"
 else
     OUTPUT_FNAME="${BUILD_NAME}.tar.xz"
-    tar cJf "${ARTIFACTS_PATH}/${OUTPUT_FNAME}" "$BUILD_NAME"
+    tar -I'xz -9' -cf "${ARTIFACTS_PATH}/${OUTPUT_FNAME}" "$BUILD_NAME"
 fi
 cd -
 
