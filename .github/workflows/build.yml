@@ -154,6 +154,7 @@ jobs:
         with:
           name: ffmpeg
           path: artifacts/*
+          retention-days: 5
   publish_release:
     name: Publish release
     if: ${{ github.event_name == 'schedule' || github.event.inputs.doRelease == 'true' }}
@@ -192,11 +193,6 @@ jobs:
           hub release create $(for a in latest_artifacts/*; do echo -a $a; done) -m "$NAME" -t "master" "$TAGNAME"
         env:
           GITHUB_TOKEN: ${{ github.token }}
-      - uses: kolpav/purge-artifacts-action@v1
-        if: ${{ success() }}
-        with:
-          token: ${{ github.token }}  # ${{ secrets.GITHUB_TOKEN }}
-          expire-in: 3days
       - name: Prune old releases
         run: ./util/prunetags.sh
         env:
