@@ -16,10 +16,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      max-parallel: 6
+      max-parallel: 8
       matrix:
-        target: [win64,linux64]
-        variant: [nonfree,gpl,nonfree 4.4,gpl 4.4,nonfree 5.0,gpl 5.0,nonfree-shared,gpl-shared,nonfree-shared 4.4,gpl-shared 4.4,nonfree-shared 5.0,gpl-shared 5.0]
+        target: [win32,win64,linux64,linuxarm64]
+        variant: [nonfree,gpl,nonfree 5.0,gpl 5.0,nonfree-shared,gpl-shared,nonfree-shared 5.0,gpl-shared 5.0]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -37,4 +37,4 @@ jobs:
         with:
           name: ffmpeg
           path: artifacts/*
-          retention-days: 5
+          retention-days: 7
